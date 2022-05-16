@@ -36,18 +36,18 @@ export const Regi = styled.div`
         height: 70px;
         font-size: 16px;
       }
-      button {
-        width: 40%;
-        height: 35px;
-        border-radius: 5px;
-        border: 0;
-        font-size: 16px;
-        background-color: coral;
-        color: white;
-        font-size: large;
-        cursor: pointer;
-      }
     }
+  }
+  .button {
+    width: 40%;
+    height: 35px;
+    border-radius: 5px;
+    border: 0;
+    font-size: 16px;
+    background-color: coral;
+    color: white;
+    font-size: large;
+    cursor: pointer;
   }
 `;
 
@@ -71,14 +71,14 @@ export const Navbar = styled.div`
       width: 60%;
       border-radius: 5px;
     }
+  }
 
-    button {
-      height: 30px;
-      background-color: azure;
-      font-size: large;
-      border: 0;
-      width: 100px;
-      border-radius: 5px;
-    }
+  button {
+    height: 30px;
+    background-color: azure;
+    font-size: large;
+    border: 0;
+    width: 100px;
+    border-radius: 5px;
   }
 `;

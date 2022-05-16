@@ -4,6 +4,8 @@ export const AUTH_REQUEST = "AUTH_REQUEST";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const GET_USERS = "GET_USERS";
+export const GET_USER_DATA = "GET_USER_DATA";
+export const GET_TOKEN = "GET_TOKEN";
 
 const authRequest = () => ({
   type: AUTH_REQUEST,
@@ -38,6 +40,16 @@ export const registerUser = (payload, navigate) => async (dispatch) => {
 
 //Login
 
+const getToken = (payload) => ({
+  type: GET_TOKEN,
+  payload,
+});
+
+const getUserData = (payload) => ({
+  type: GET_USER_DATA,
+  payload,
+});
+
 export const loginUser = (payload, navigate) => async (dispatch) => {
   console.log(payload);
   try {
@@ -45,15 +57,34 @@ export const loginUser = (payload, navigate) => async (dispatch) => {
       `https://masai-api-mocker.herokuapp.com/auth/login`,
       payload
     );
+    let username = payload.username;
 
-    navigate("/dashboard");
+    // navigate("/dashboard");
     if (!res.data.error) {
       alert("login Successful");
+      dispatch(getToken(res.data.token));
+      console.log(res.data);
+
+      let res1 = await fetch(
+        `https://masai-api-mocker.herokuapp.com/user/${username}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${res.data.token}`,
+          },
+        }
+      );
+
+      let data1 = await res1.json();
+      console.log(username, data1);
+
+      dispatch(getUserData(data1));
     }
   } catch (err) {
     alert("Invalid Creadentials");
   }
 };
+
 //search user
 // https://api.github.com/search/users?q=gautam
 
